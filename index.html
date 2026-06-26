@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DMS Ambiental · Proposta Estratégica de Tráfego</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --g900: #0B2218;
+  --g800: #0F3322;
+  --g700: #14472E;
+  --g600: #1B6040;
+  --g500: #237A50;
+  --g400: #2E9463;
+  --g300: #4DB882;
+  --g200: #8DD9B0;
+  --g100: #C4EDD7;
+  --g50:  #EBF8F1;
+  --gold: #C8952A;
+  --gold-light: #F5EDD5;
+  --ink:  #0C0F0C;
+  --ink2: #374037;
+  --ink3: #6B7B6B;
+  --rule: #DDE5DD;
+  --bg:   #F7FAF7;
+  --white:#FFFFFF;
+  --red:  #C0392B;
+  --amber:#D97706;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--white);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── COVER ─── */
+.cover {
+  min-height: 100vh;
+  background: var(--g900);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.cover-noise {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    radial-gradient(ellipse 70% 55% at 85% 15%, rgba(45,160,100,.18) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 70% at 5% 85%, rgba(20,71,46,.4) 0%, transparent 55%);
+}
+
+.cover-grid {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 32px 64px;
+  position: relative; z-index: 2;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+.logo {
+  display: flex; align-items: center; gap: 12px;
+}
+
+.logo-mark {
+  width: 40px; height: 40px;
+  background: var(--g500);
+  border-radius: 8px;
+  display: grid; place-items: center;
+  font-weight: 800; font-size: 12px;
+  letter-spacing: .5px; color: #fff;
+}
+
+.logo-name { font-size: 13px; font-weight: 600; color: rgba(255,255,255,.75); letter-spacing: .3px; }
+
+.topbar-right {
+  display: flex; align-items: center; gap: 20px;
+}
+
+.pill {
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+}
+.pill-gold { background: rgba(200,149,42,.15); border: 1px solid rgba(200,149,42,.4); color: var(--gold); }
+.pill-green { background: rgba(45,148,99,.2); border: 1px solid rgba(45,148,99,.5); color: var(--g200); }
+
+.cover-body {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 64px 64px 0;
+  position: relative; z-index: 2;
+  max-width: 860px;
+}
+
+.eyebrow {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 10px; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--g300);
+  margin-bottom: 28px;
+}
+.eyebrow::before {
+  content: ''; display: block;
+  width: 28px; height: 2px; background: var(--g400);
+  flex-shrink: 0;
+}
+
+.cover h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(44px, 6.5vw, 76px);
+  line-height: 1.05;
+  color: #fff;
+  margin-bottom: 32px;
+}
+
+.cover h1 em {
+  font-style: italic;
+  color: var(--g300);
+}
+
+.cover-desc {
+  font-size: 17px; font-weight: 300;
+  color: rgba(255,255,255,.6);
+  max-width: 560px; line-height: 1.75;
+  margin-bottom: 52px;
+}
+
+.cover-facts {
+  display: flex; gap: 0;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px; overflow: hidden;
+  width: fit-content;
+}
+.fact {
+  padding: 18px 28px;
+  border-right: 1px solid rgba(255,255,255,.08);
+}
+.fact:last-child { border-right: none; }
+.fact-label { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 4px; }
+.fact-val   { font-size: 13px; font-weight: 600; color: rgba(255,255,255,.8); }
+
+.cover-foot {
+  padding: 32px 64px;
+  position: relative; z-index: 2;
+  display: flex; align-items: flex-end; justify-content: space-between;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.cover-foot p { font-size: 11px; color: rgba(255,255,255,.25); letter-spacing: .3px; }
+.scroll-hint {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 10px; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(255,255,255,.25);
+}
+.scroll-line { width: 1px; height: 48px; background: linear-gradient(rgba(255,255,255,.25), transparent); }
+
+/* ─── LAYOUT ─── */
+.section { padding: 96px 64px; }
+.section-sm { padding: 64px 64px; }
+
+.sec-label {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 10px; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--g500);
+  margin-bottom: 16px;
+}
+.sec-label::before { content: ''; width: 20px; height: 2px; background: var(--g400); }
+
+h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(30px, 4vw, 46px);
+  line-height: 1.12; color: var(--g900);
+  margin-bottom: 16px; max-width: 680px;
+}
+
+.lead {
+  font-size: 16px; color: var(--ink3);
+  max-width: 600px; line-height: 1.75;
+  margin-bottom: 56px;
+}
+
+hr.rule { border: none; border-top: 1px solid var(--rule); margin: 0; }
+
+/* ─── SITUAÇÃO ATUAL ─── */
+.atual-bg { background: var(--g900); }
+.atual-bg h2 { color: #fff; }
+.atual-bg .sec-label { color: var(--g300); }
+.atual-bg .sec-label::before { background: var(--g400); }
+.atual-bg .lead { color: rgba(255,255,255,.55); }
+
+.atual-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2px;
+  background: rgba(255,255,255,.06);
+  border-radius: 14px; overflow: hidden;
+}
+
+.atual-card {
+  background: rgba(255,255,255,.04);
+  padding: 32px 28px;
+}
+
+.atual-card:hover { background: rgba(255,255,255,.07); transition: background .2s; }
+
+.status-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 12px; border-radius: 20px;
+  font-size: 10px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; margin-bottom: 18px;
+}
+.s-crit  { background: rgba(192,57,43,.2); color: #F1948A; border: 1px solid rgba(192,57,43,.3); }
+.s-warn  { background: rgba(217,119,6,.2); color: #F5CBA7; border: 1px solid rgba(217,119,6,.3); }
+.s-ok    { background: rgba(35,122,80,.25); color: var(--g200); border: 1px solid rgba(35,122,80,.4); }
+
+.atual-card h3 { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+.atual-card p  { font-size: 13px; color: rgba(255,255,255,.5); line-height: 1.65; }
+
+.atual-card .big-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 52px; line-height: 1;
+  color: var(--g300); margin: 14px 0 6px;
+}
+.atual-card .big-sub {
+  font-size: 10px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(255,255,255,.3);
+}
+
+/* ─── INSIGHT BOX ─── */
+.insight {
+  background: var(--gold-light);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 10px 10px 0;
+  padding: 20px 24px;
+  margin-top: 32px;
+}
+.insight strong { display: block; font-size: 13px; font-weight: 700; color: var(--g900); margin-bottom: 4px; }
+.insight p { font-size: 13px; color: var(--ink2); line-height: 1.6; }
+
+/* ─── O ANÚNCIO ATUAL (screenshot analysis) ─── */
+.ads-bg { background: var(--bg); }
+
+.ads-analysis {
+  display: grid; grid-template-columns: 1fr 1.1fr; gap: 40px; align-items: start;
+}
+
+.ad-preview-wrap {
+  position: sticky; top: 32px;
+}
+
+.ad-preview {
+  border: 1px solid var(--rule);
+  border-radius: 12px; overflow: hidden;
+  background: var(--white);
+}
+
+.ad-chrome {
+  background: #F1F3F4;
+  padding: 10px 16px;
+  display: flex; align-items: center; gap: 10px;
+  border-bottom: 1px solid var(--rule);
+}
+.ad-dot { width: 10px; height: 10px; border-radius: 50%; }
+.ad-url-bar {
+  flex: 1; background: #fff; border: 1px solid var(--rule);
+  border-radius: 20px; padding: 4px 14px;
+  font-size: 11px; color: var(--ink3); display: flex; align-items: center; gap: 6px;
+}
+
+.ad-body { padding: 24px; }
+
+.sponsored-tag {
+  font-size: 11px; color: #0D7C3E;
+  border: 1px solid #0D7C3E; border-radius: 4px;
+  padding: 1px 6px; display: inline-block; margin-bottom: 8px;
+}
+
+.ad-domain { font-size: 13px; color: var(--ink3); margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+.ad-domain-dot { width: 16px; height: 16px; border-radius: 50%; background: var(--g500); display: grid; place-items: center; }
+.ad-title { font-size: 18px; color: #1558D6; font-weight: 400; margin-bottom: 6px; line-height: 1.3; }
+.ad-title:hover { text-decoration: underline; cursor: pointer; }
+.ad-desc { font-size: 13px; color: var(--ink2); line-height: 1.55; margin-bottom: 16px; }
+
+.ad-gaps { display: flex; flex-direction: column; gap: 8px; }
+.ad-gap-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  background: #FFF5F5; border-radius: 8px; padding: 10px 12px;
+  font-size: 12px; color: var(--ink2); line-height: 1.5;
+}
+.gap-icon { flex-shrink: 0; font-size: 14px; }
+
+/* analysis side */
+.analysis-list { display: flex; flex-direction: column; gap: 16px; }
+
+.analysis-item {
+  border: 1px solid var(--rule);
+  border-radius: 12px; overflow: hidden;
+  background: var(--white);
+}
+
+.ai-head {
+  display: flex; align-items: center; gap: 14px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.ai-num {
+  width: 32px; height: 32px; border-radius: 8px;
+  display: grid; place-items: center;
+  font-size: 13px; font-weight: 800; flex-shrink: 0;
+}
+.ai-num-bad  { background: #FDECEA; color: var(--red); }
+.ai-num-warn { background: #FEF3C7; color: var(--amber); }
+.ai-num-good { background: var(--g50); color: var(--g700); }
+
+.ai-head h4 { font-size: 14px; font-weight: 700; color: var(--ink); }
+.ai-head span { font-size: 12px; color: var(--ink3); display: block; margin-top: 1px; }
+
+.ai-body {
+  padding: 16px 20px;
+  font-size: 13px; color: var(--ink2); line-height: 1.65;
+}
+
+.ai-fix {
+  background: var(--g50);
+  border-top: 1px solid var(--g100);
+  padding: 12px 20px;
+  font-size: 12px; color: var(--g700); font-weight: 600;
+  display: flex; align-items: flex-start; gap: 8px;
+}
+.ai-fix::before { content: '→'; color: var(--g500); flex-shrink: 0; }
+
+/* ─── KEYWORDS ─── */
+.kw-bg { background: var(--g900); }
+.kw-bg h2 { color: #fff; }
+.kw-bg .sec-label { color: var(--g300); }
+.kw-bg .sec-label::before { background: var(--g400); }
+.kw-bg .lead { color: rgba(255,255,255,.55); }
+
+.grupos { display: flex; flex-direction: column; gap: 24px; }
+
+.grupo {
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 14px; overflow: hidden;
+}
+
+.grupo-header {
+  display: flex; align-items: center; gap: 0;
+  background: rgba(255,255,255,.06);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.grupo-tag {
+  padding: 16px 24px;
+  font-size: 9px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase;
+  border-right: 1px solid rgba(255,255,255,.08);
+  white-space: nowrap;
+}
+
+.grupo-name {
+  padding: 16px 24px;
+  font-size: 14px; font-weight: 700; color: #fff; flex: 1;
+}
+
+.grupo-intent {
+  padding: 16px 24px;
+  font-size: 11px; font-weight: 600; letter-spacing: .5px;
+  color: var(--g200);
+  border-left: 1px solid rgba(255,255,255,.08);
+  white-space: nowrap;
+}
+
+.kw-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.kw-table th {
+  font-size: 9px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(255,255,255,.3);
+  padding: 12px 16px; text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  background: rgba(0,0,0,.1);
+}
+
+.kw-table td {
+  padding: 11px 16px;
+  font-size: 13px; color: rgba(255,255,255,.7);
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  vertical-align: middle;
+}
+
+.kw-table tr:last-child td { border-bottom: none; }
+.kw-table tr:hover td { background: rgba(255,255,255,.03); }
+
+.kw-match {
+  font-size: 10px; font-weight: 700;
+  padding: 3px 8px; border-radius: 4px;
+  letter-spacing: .5px;
+}
+.m-exact { background: rgba(77,184,130,.15); color: var(--g300); }
+.m-phrase { background: rgba(200,149,42,.15); color: #E8B96A; }
+.m-broad  { background: rgba(130,130,130,.15); color: rgba(255,255,255,.5); }
+
+.vol-bar-wrap { display: flex; align-items: center; gap: 10px; }
+.vol-bar {
+  height: 4px; border-radius: 2px;
+  background: rgba(255,255,255,.08);
+  flex: 1; position: relative;
+}
+.vol-fill { height: 100%; border-radius: 2px; background: var(--g400); }
+.vol-num { font-size: 11px; font-weight: 700; color: rgba(255,255,255,.5); white-space: nowrap; }
+
+.cpc-val { font-size: 12px; font-weight: 700; color: rgba(255,255,255,.6); }
+
+.intent-icon { font-size: 14px; }
+
+/* sitelinks */
+.sitelinks-preview {
+  margin-top: 32px;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 14px; overflow: hidden;
+}
+.sl-header {
+  background: rgba(255,255,255,.06);
+  padding: 16px 24px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  font-size: 11px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--g300);
+}
+.sl-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 0;
+}
+.sl-item {
+  padding: 20px 20px;
+  border-right: 1px solid rgba(255,255,255,.06);
+}
+.sl-item:last-child { border-right: none; }
+.sl-title { font-size: 13px; font-weight: 600; color: #85B7F4; margin-bottom: 4px; }
+.sl-desc  { font-size: 11px; color: rgba(255,255,255,.4); line-height: 1.5; }
+
+/* ─── ESTRUTURA CONTA ─── */
+.estrutura-grid {
+  display: grid; grid-template-columns: 240px 1fr; gap: 0;
+  border: 1px solid var(--rule);
+  border-radius: 14px; overflow: hidden;
+}
+
+.estrutura-nav {
+  background: var(--g900);
+  padding: 24px 0;
+}
+
+.estrutura-nav-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: background .15s;
+}
+
+.estrutura-nav-item:hover { background: rgba(255,255,255,.05); }
+.estrutura-nav-item.active { background: rgba(255,255,255,.08); border-right: 2px solid var(--g400); }
+
+.nav-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  display: grid; place-items: center;
+  font-size: 14px; flex-shrink: 0;
+}
+
+.nav-text { font-size: 12px; font-weight: 600; color: rgba(255,255,255,.7); }
+.nav-count { font-size: 10px; color: rgba(255,255,255,.3); }
+
+.estrutura-content {
+  padding: 32px;
+  background: var(--white);
+}
+
+.camp-card {
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.camp-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 18px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--rule);
+}
+
+.camp-head h4 { font-size: 13px; font-weight: 700; color: var(--ink); }
+.camp-badges { display: flex; gap: 6px; }
+.camp-badge {
+  font-size: 9px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; padding: 3px 8px;
+  border-radius: 4px;
+}
+.cb-search { background: var(--g50); color: var(--g700); }
+.cb-display { background: #EFF6FF; color: #1D4ED8; }
+.cb-smart   { background: #FEF3C7; color: #92400E; }
+
+.grupo-rows { padding: 0 18px; }
+.grupo-row {
+  display: grid; grid-template-columns: 1fr auto auto auto;
+  gap: 16px; align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 13px;
+}
+.grupo-row:last-child { border-bottom: none; }
+.gr-name { color: var(--ink); font-weight: 600; }
+.gr-kws  { color: var(--ink3); font-size: 11px; }
+.gr-budget { font-size: 12px; font-weight: 700; color: var(--g700); }
+
+/* ─── PLANO ─── */
+.plano-outer { background: var(--bg); }
+
+.plano-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+  background: var(--rule); border-radius: 14px; overflow: hidden;
+}
+
+.plano-card { background: var(--white); padding: 36px 32px; }
+
+.plano-week {
+  font-size: 9px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--g500); margin-bottom: 14px;
+}
+
+.plano-card h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px; color: var(--g900); margin-bottom: 10px;
+}
+.plano-card p { font-size: 13px; color: var(--ink3); line-height: 1.7; margin-bottom: 18px; }
+
+.task-list { display: flex; flex-direction: column; gap: 8px; }
+.task {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 12px; color: var(--ink2); font-weight: 500;
+}
+.task::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%; background: var(--g400); flex-shrink: 0;
+}
+
+/* ─── INVESTIMENTO ─── */
+.inv-grid {
+  display: grid; grid-template-columns: 1fr 1.05fr 1fr;
+  gap: 0; border: 1px solid var(--rule); border-radius: 16px; overflow: hidden;
+}
+
+.inv-col { display: flex; flex-direction: column; }
+.inv-col + .inv-col { border-left: 1px solid var(--rule); }
+
+.inv-col.featured { background: var(--g900); border-color: var(--g900); }
+
+.inv-top {
+  padding: 32px 28px;
+  border-bottom: 1px solid var(--rule);
+}
+.inv-col.featured .inv-top { border-color: rgba(255,255,255,.1); }
+
+.inv-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; margin-bottom: 16px;
+  padding: 4px 10px; border-radius: 20px;
+}
+
+.inv-col:not(.featured) .inv-tag { background: var(--bg); color: var(--ink3); }
+.inv-col.featured .inv-tag { background: var(--gold); color: #fff; }
+
+.inv-title { font-size: 16px; font-weight: 800; color: var(--g900); margin-bottom: 4px; }
+.inv-col.featured .inv-title { color: #fff; }
+.inv-sub { font-size: 12px; color: var(--ink3); }
+.inv-col.featured .inv-sub { color: rgba(255,255,255,.5); }
+
+.inv-price {
+  padding: 24px 28px;
+  border-bottom: 1px solid var(--rule);
+}
+.inv-col.featured .inv-price { border-color: rgba(255,255,255,.1); }
+
+.price-main {
+  font-family: 'DM Serif Display', serif;
+  font-size: 44px; line-height: 1;
+  color: var(--g900); margin-bottom: 4px;
+}
+.inv-col.featured .price-main { color: var(--g300); }
+.price-period { font-size: 12px; color: var(--ink3); font-weight: 500; }
+.inv-col.featured .price-period { color: rgba(255,255,255,.45); }
+
+.inv-features { padding: 24px 28px; flex: 1; }
+.inv-features li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 13px; line-height: 1.55;
+  color: var(--ink2); padding: 6px 0;
+  border-bottom: 1px solid var(--rule);
+  list-style: none;
+}
+.inv-col.featured .inv-features li { color: rgba(255,255,255,.65); border-color: rgba(255,255,255,.07); }
+.inv-features li:last-child { border-bottom: none; }
+.inv-features li::before { content: '✓'; color: var(--g400); font-weight: 800; flex-shrink: 0; margin-top: 1px; }
+.inv-col.featured .inv-features li::before { color: var(--g300); }
+
+.inv-footer { padding: 24px 28px; border-top: 1px solid var(--rule); }
+.inv-col.featured .inv-footer { border-color: rgba(255,255,255,.1); }
+
+.btn-main {
+  display: block; width: 100%;
+  padding: 14px 24px;
+  border-radius: 10px;
+  font-size: 13px; font-weight: 700;
+  text-align: center; text-decoration: none;
+  cursor: pointer; border: none;
+  transition: all .2s;
+}
+.btn-green { background: var(--g500); color: #fff; }
+.btn-green:hover { background: var(--g600); }
+.btn-ghost { background: transparent; color: var(--g600); border: 1.5px solid var(--g300); }
+.btn-ghost:hover { background: var(--g50); }
+.btn-gold { background: var(--gold); color: #fff; }
+.btn-gold:hover { background: #A07A22; }
+
+/* ─── ROI ─── */
+.roi-bg { background: var(--g900); }
+.roi-bg h2 { color: #fff; }
+.roi-bg .sec-label { color: var(--g300); }
+.roi-bg .sec-label::before { background: var(--g400); }
+.roi-bg .lead { color: rgba(255,255,255,.55); }
+
+.roi-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 2px; background: rgba(255,255,255,.06);
+  border-radius: 14px; overflow: hidden;
+}
+.roi-card {
+  background: rgba(255,255,255,.04);
+  padding: 32px 24px; text-align: center;
+}
+.roi-card:hover { background: rgba(255,255,255,.08); transition: background .2s; }
+.roi-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 48px; line-height: 1; color: var(--g300);
+  margin-bottom: 8px;
+}
+.roi-unit { font-size: 22px; color: var(--g200); }
+.roi-desc { font-size: 12px; color: rgba(255,255,255,.45); line-height: 1.5; font-weight: 500; }
+
+/* ─── PORQUE EU ─── */
+.pq-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.pq-item {
+  display: flex; gap: 18px; align-items: flex-start;
+  padding: 28px;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  transition: border-color .2s, background .2s;
+}
+.pq-item:hover { border-color: var(--g300); background: var(--g50); }
+.pq-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  background: var(--g50); display: grid; place-items: center;
+  font-size: 20px; flex-shrink: 0;
+}
+.pq-item h3 { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.pq-item p  { font-size: 13px; color: var(--ink3); line-height: 1.6; }
+
+/* ─── CTA ─── */
+.cta-section {
+  background: var(--g900); text-align: center;
+  padding: 120px 64px; position: relative; overflow: hidden;
+}
+.cta-glow {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 55% at 30% 50%, rgba(35,122,80,.2) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 55% at 70% 50%, rgba(20,71,46,.3) 0%, transparent 55%);
+}
+.cta-section > * { position: relative; z-index: 1; }
+.cta-section h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(36px, 5vw, 58px);
+  color: #fff; margin: 24px auto 20px;
+  max-width: 700px; line-height: 1.1;
+}
+.cta-section p { font-size: 16px; color: rgba(255,255,255,.55); max-width: 480px; margin: 0 auto 48px; line-height: 1.7; }
+.cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.cta-btn-pri {
+  background: var(--g400); color: #fff;
+  padding: 16px 36px; border-radius: 10px;
+  font-size: 14px; font-weight: 700;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: all .2s; display: inline-flex; align-items: center; gap: 8px;
+}
+.cta-btn-pri:hover { background: var(--g500); transform: translateY(-2px); }
+.cta-btn-sec {
+  background: rgba(255,255,255,.08); color: rgba(255,255,255,.8);
+  border: 1px solid rgba(255,255,255,.2);
+  padding: 15px 36px; border-radius: 10px;
+  font-size: 14px; font-weight: 600;
+  text-decoration: none; cursor: pointer;
+  transition: background .2s; display: inline-flex; align-items: center; gap: 8px;
+}
+.cta-btn-sec:hover { background: rgba(255,255,255,.14); }
+
+/* ─── FOOTER ─── */
+.footer {
+  background: #060D08;
+  padding: 32px 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+}
+.footer p { font-size: 11px; color: rgba(255,255,255,.2); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-size: 12px; color: rgba(255,255,255,.35); text-decoration: none; font-weight: 500; transition: color .2s; }
+.footer-links a:hover { color: var(--g300); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .topbar, .cover-body, .cover-foot, .section, .cta-section, .footer { padding-left: 24px; padding-right: 24px; }
+  .atual-grid, .sl-grid, .plano-grid, .inv-grid, .roi-grid, .pq-grid { grid-template-columns: 1fr; }
+  .ads-analysis { grid-template-columns: 1fr; }
+  .ad-preview-wrap { position: static; }
+  .estrutura-grid { grid-template-columns: 1fr; }
+  .cover-facts { flex-wrap: wrap; }
+  .kw-table th:nth-child(3), .kw-table td:nth-child(3) { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ COVER ══════════════════ -->
+<section class="cover">
+  <div class="cover-noise"></div>
+  <div class="cover-grid"></div>
+
+  <header class="topbar">
+    <div class="logo">
+      <div class="logo-mark">DMS</div>
+      <span class="logo-name">DMS Ambiental · Brasília/DF</span>
+    </div>
+    <div class="topbar-right">
+      <span class="pill pill-green">25 anos de mercado</span>
+      <span class="pill pill-gold">Proposta exclusiva</span>
+    </div>
+  </header>
+
+  <div class="cover-body">
+    <div class="eyebrow">Estratégia de Tráfego Pago &amp; SEO</div>
+    <h1>Da infraestrutura sólida<br>para a <em>visibilidade que converte.</em></h1>
+    <p class="cover-desc">
+      Você já tem licença, experiência e operação. O que está faltando é aparecer no Google quando uma indústria, hospital ou construtora do DF tem um problema ambiental urgente. Vamos resolver isso.
+    </p>
+    <div class="cover-facts">
+      <div class="fact">
+        <div class="fact-label">Empresa</div>
+        <div class="fact-val">DMS Serviços Ambientais</div>
+      </div>
+      <div class="fact">
+        <div class="fact-label">CNPJ</div>
+        <div class="fact-val">04.389.820/0001-78</div>
+      </div>
+      <div class="fact">
+        <div class="fact-label">Anúncios ativos</div>
+        <div class="fact-val">1 campanha · estrutura incompleta</div>
+      </div>
+      <div class="fact">
+        <div class="fact-label">Data</div>
+        <div class="fact-val">Junho 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-foot">
+    <p>Documento confidencial · Elaborado especificamente para DMS Ambiental</p>
+    <div class="scroll-hint"><div class="scroll-line"></div> Diagnóstico completo abaixo</div>
+  </div>
+</section>
+
+<!-- ══════════════════ SITUAÇÃO ATUAL ══════════════════ -->
+<section class="section atual-bg">
+  <div class="sec-label">Diagnóstico de presença digital</div>
+  <h2>O que encontramos hoje</h2>
+  <p class="lead">Uma empresa de R$ 1,9 mi de capital social com 25 anos no mercado — quase invisível para quem busca gestão de resíduos no Google.</p>
+
+  <div class="atual-grid">
+    <div class="atual-card">
+      <span class="status-badge s-crit">&#9679; Crítico</span>
+      <h3>1 único anúncio no ar</h3>
+      <p>Identificado 1 anúncio ativo no Google Ads Transparency Center. Sem sitelinks, sem extensões, sem grupos de anúncios segmentados por serviço ou público.</p>
+    </div>
+    <div class="atual-card">
+      <span class="status-badge s-crit">&#9679; Crítico</span>
+      <h3>Tráfego orgânico próximo de zero</h3>
+      <p>O site foi construído no Lovable (gerador de IA) sem estrutura de SEO técnico. Não aparece para nenhum termo estratégico como "coleta resíduos perigosos DF" ou "empresa ambiental Brasília".</p>
+    </div>
+    <div class="atual-card">
+      <span class="status-badge s-warn">&#9679; Oportunidade</span>
+      <h3>Invisível nas IAs — Google e ChatGPT</h3>
+      <div class="big-num">0</div>
+      <p class="big-sub">citações da DMS em respostas de IA</p>
+      <p style="margin-top:10px">Em 2026, o Google exibe AI Overviews antes dos links orgânicos. Quando um gestor pergunta "melhor empresa de resíduos em Brasília" para uma IA, a DMS não aparece. Esse é o próximo campo a dominar.</p>
+    </div>
+    <div class="atual-card">
+      <span class="status-badge s-ok">&#9679; Ativo</span>
+      <h3>Credenciais operacionais fortes</h3>
+      <p>Licenças vigentes (IBAMA, órgãos do DF), sistema próprio de área do cliente, 0800 gratuito, MTR e PGRS como diferenciais reais. Ativo valioso que nenhum concorrente pode copiar rapidamente.</p>
+    </div>
+    <div class="atual-card">
+      <span class="status-badge s-crit">&#9679; Crítico</span>
+      <h3>Concorrentes comprando os seus termos</h3>
+      <p>Enquanto a DMS está com 1 anúncio incompleto, concorrentes de menor porte estão capturando empresas que buscam "coleta resíduos industriais Brasília" e "PGRS DF" — leads que deveriam ser seus.</p>
+    </div>
+    <div class="atual-card">
+      <span class="status-badge s-ok">&#9679; Positivo</span>
+      <h3>Janela de oportunidade real</h3>
+      <p>O setor ambiental no DF tem alta demanda regulatória (PNRS, Lei 12.305/2010) e baixa competição em anúncios digitais. Custo por lead menor que a média nacional. Espaço enorme para dominar.</p>
+    </div>
+  </div>
+
+  <div class="insight">
+    <strong>O problema não é a empresa — é a distribuição</strong>
+    <p>A DMS tem tudo que o mercado precisa. O que falta é estar presente no momento exato em que o gestor ambiental de uma indústria de Ceilândia ou o responsável de facilities de um hospital do Plano Piloto busca uma solução. É exatamente isso que o plano a seguir resolve.</p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ══════════════════ ANÁLISE DO ANÚNCIO ══════════════════ -->
+<section class="section ads-bg">
+  <div class="sec-label">Análise do anúncio atual</div>
+  <h2>O que está no ar — e o que está faltando</h2>
+  <p class="lead">O único anúncio ativo da DMS tem uma boa base, mas deixa dinheiro na mesa por falta de extensões e estrutura.</p>
+
+  <div class="ads-analysis">
+    <!-- preview -->
+    <div class="ad-preview-wrap">
+      <div class="ad-preview">
+        <div class="ad-chrome">
+          <div class="ad-dot" style="background:#FF5F57"></div>
+          <div class="ad-dot" style="background:#FEBC2E"></div>
+          <div class="ad-dot" style="background:#28C840"></div>
+          <div class="ad-url-bar">
+            <span style="color:#0D7C3E;font-size:10px">🔒</span>
+            ads.google.com/transparency · dmsambiental.com.br
+          </div>
+        </div>
+        <div class="ad-body">
+          <span class="sponsored-tag">Patrocinado</span>
+          <div class="ad-domain">
+            <div class="ad-domain-dot">
+              <svg width="8" height="8" viewBox="0 0 8 8" fill="white"><circle cx="4" cy="4" r="3"/></svg>
+            </div>
+            www.dmsambiental.com.br
+          </div>
+          <div class="ad-title">Plano de Gerenciamento (PGRS) - Coleta de Resíduos Industriais</div>
+          <div class="ad-desc">Atuamos no DF e Centro-Oeste com MTR, PGRS e logística segura de resíduos.</div>
+
+          <div style="border-top:1px solid #eee; margin-top:16px; padding-top:12px;">
+            <p style="font-size:10px;color:#999;margin-bottom:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Sitelinks — ausentes no anúncio atual</p>
+            <div class="ad-gaps">
+              <div class="ad-gap-item"><span class="gap-icon">⛔</span> Sem sitelinks adicionais — o anúncio perde espaço na SERP e cliques extras</div>
+              <div class="ad-gap-item"><span class="gap-icon">⛔</span> Sem extensão de chamada (0800 400 0442) — o lead não liga direto do anúncio</div>
+              <div class="ad-gap-item"><span class="gap-icon">⛔</span> Sem extensão de localização — não aparece "Brasília/DF" no anúncio</div>
+              <div class="ad-gap-item"><span class="gap-icon">⛔</span> Sem snippets estruturados — não lista serviços (PGRS, PGRSS, Classe I e II)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- analysis -->
+    <div class="analysis-list">
+
+      <div class="analysis-item">
+        <div class="ai-head">
+          <div class="ai-num ai-num-good">✓</div>
+          <div>
+            <h4>Título com intenção transacional forte</h4>
+            <span>O que está funcionando</span>
+          </div>
+        </div>
+        <div class="ai-body">"Plano de Gerenciamento (PGRS) - Coleta de Resíduos Industriais" captura buscas de fundo de funil. Quem pesquisa PGRS está com um problema real e precisa de solução agora.</div>
+        <div class="ai-fix">Manter e duplicar com variações: "PGRS Brasília · Empresa Licenciada" e "Coleta Resíduos Perigosos DF · MTR + CDF"</div>
+      </div>
+
+      <div class="analysis-item">
+        <div class="ai-head">
+          <div class="ai-num ai-num-bad">✗</div>
+          <div>
+            <h4>Zero sitelinks — perda de 30–40% de espaço</h4>
+            <span>Oportunidade desperdiçada</span>
+          </div>
+        </div>
+        <div class="ai-body">Anúncios com sitelinks ocupam até 2× mais espaço na página de resultados, aumentam CTR em 20–30% e permitem direcionar para landing pages específicas por serviço.</div>
+        <div class="ai-fix">Criar 6 sitelinks: Resíduos Classe I · Coleta RSS · PGRS e MTR · Locação de Equipamentos · Área do Cliente · Solicitar Orçamento</div>
+      </div>
+
+      <div class="analysis-item">
+        <div class="ai-head">
+          <div class="ai-num ai-num-bad">✗</div>
+          <div>
+            <h4>Sem extensão de chamada</h4>
+            <span>Lead perdido antes do clique</span>
+          </div>
+        </div>
+        <div class="ai-body">Em B2B industrial, 40–60% dos contatos preferem ligar diretamente. Sem extensão de chamada com o 0800, você obriga o lead a clicar, navegar e buscar o telefone — cada etapa extra é atrito.</div>
+        <div class="ai-fix">Adicionar extensão: "0800 400 0442 · Seg–Sex 8h–18h" com rastreamento de chamadas ativado</div>
+      </div>
+
+      <div class="analysis-item">
+        <div class="ai-head">
+          <div class="ai-num ai-num-warn">!</div>
+          <div>
+            <h4>Descrição vaga — não diferencia da concorrência</h4>
+            <span>Melhorar urgência e diferencial competitivo</span>
+          </div>
+        </div>
+        <div class="ai-body">"Atuamos no DF e Centro-Oeste com MTR, PGRS e logística segura" é correto mas genérico. Não comunica os 25 anos de mercado, a licença ativa, nem o atendimento de emergência.</div>
+        <div class="ai-fix">Nova descrição: "25 anos licenciados no DF · Resíduos Classe I e II · MTR + CDF emitidos · Atendimento em 24h"</div>
+      </div>
+
+      <div class="analysis-item">
+        <div class="ai-head">
+          <div class="ai-num ai-num-bad">✗</div>
+          <div>
+            <h4>1 grupo de anúncios para todos os serviços</h4>
+            <span>Estrutura que desperdiça verba</span>
+          </div>
+        </div>
+        <div class="ai-body">Com uma só campanha e grupo único, o mesmo anúncio responde para "PGRS" e para "locação de caçamba" — intenções completamente diferentes. Índice de qualidade cai, CPC sobe, conversão cai.</div>
+        <div class="ai-fix">Reestruturar em 4 campanhas com grupos de anúncios dedicados — veja a estrutura completa na próxima seção</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ══════════════════ KEYWORDS ══════════════════ -->
+<section class="section kw-bg">
+  <div class="sec-label">Pesquisa de palavras-chave</div>
+  <h2>Os termos que seus clientes pesquisam agora</h2>
+  <p class="lead">Mapeamento dos grupos de anúncios com volume estimado mensal, CPC médio e intenção de busca. Focado no mercado do DF e Centro-Oeste.</p>
+
+  <div class="grupos">
+
+    <!-- GRUPO 1 -->
+    <div class="grupo">
+      <div class="grupo-header">
+        <div class="grupo-tag" style="color:#4DB882;background:rgba(77,184,130,.12)">Grupo 01</div>
+        <div class="grupo-name">Gestão e Coleta de Resíduos Industriais</div>
+        <div class="grupo-intent">🎯 Intenção transacional alta</div>
+      </div>
+      <table class="kw-table">
+        <thead>
+          <tr>
+            <th>Palavra-chave</th>
+            <th>Correspondência</th>
+            <th>Vol. mensal (BR)</th>
+            <th>CPC estimado</th>
+            <th>Intenção</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>coleta de resíduos industriais brasília</td>
+            <td><span class="kw-match m-exact">Exata</span></td>
+            <td><div class="vol-bar-wrap"><div class="vol-bar"><div class="vol-fill" style="width:65%"></div></div><span class="vol-num">320–1k</span></div></td>
+            <td><span class="cpc-val">R$ 4,20</span></td>
+            <td><span class="intent-icon">🔴</span> Compra imediata</td>
+          </tr>
+          <tr>
+            <td>empresa de coleta de resíduos DF</td>
+            <td><span class="kw-match m-exact">Exata</span></td>
+            <td><div class="vol-bar-wrap"><div class="vol-bar"><div class="vol-fill" style="width:55%"></div></div><span class="vol-num">260–900</span></div></td>
+            <td><span class="cpc-val">R$ 3,80</span></td>
+            <td><span class="intent-icon">🔴</span> Compra imediata</td>
+          </tr>
+          <tr>
+            <td>gestão de resíduos sólidos brasília</td>
+            <td><span class="kw-match m-phrase">Frase</span></td>
+            <td><div class="vol-bar-wrap"><div class="vol-bar"><div class="vol-fill" style="width:70%"></div></div><span class="vol-num">400–1,3k</span></div></td>
+            <td><span class="cpc-val">R$ 3,50</span></td>
+            <td><span class="intent-icon">🟠</span> Pesquisa de fornecedor</td>
+          </tr>
+          <tr>
+            <td>destinação final de resíduos perigosos DF</td>
+            <td><span class="kw-match m-exact">Exata</span></td>
+            <td><div class="vol-bar-wrap"><div class="vol-bar"><div class="vol-fill" style="width:40%"></div></div><span class="vol-num">100–400</span></div></td>
+            <td><span class="cpc-val">R$ 5,10</span></td>
+            <td><span class="intent-icon">🔴</span> Compra imediata</td>
+          </tr>
+          <tr>
+            <td>transporte de resíduos perigosos brasília</td>
+            <td><span class="kw-match m-phrase">Frase</span></td>
+            <td><div class="vol-bar-wrap"><div class="vol-bar"><div class="vol-fill" style="width:35%"></div></div><span class="vol-num">80–320</span></div></td>
+            <td><span class="cpc-val">R$ 4,70</span></td>
+            <td><span class="intent-icon">🔴</span> Compra imediata</td>
+          </tr>
+          <tr>
+            <td>resíduos classe I brasília</td>
+            <td><span class="kw-match m-exact">Exata</span></td>
+            <td><div class="vol-bar-wrap"><div class="vol-bar"><div class="vol-fill" style="width:30%"></div></div><span class="vol-num">70–280</span></div></td>
+            <td><span class="cpc-val">R$ 4,90</span></td>
+            <td><span class="intent-icon">🔴</span> Compra imediata</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- GRUPO 2 -->
+    <div class="grupo">
+      <div class="grupo-header">
+        <div class="grupo-tag" style="color:#F5CBA7;background:rgba(217,119,6,.12)">Grupo 02</div>
+        <div class="grupo-name">PGRS · MTR · Conformidade Legal</div>
+        <div class="grupo-intent">🎯 Intenção regulatória urgente</div>
+      </div>
+      <table class="kw-table">
+        <thead>
+          <tr>
+            <th>Palavra-chave</th>
+            <th>Correspondência</th>
+            <th>Vol. mensal (BR)</th>
+            <th>CPC estimado</th>
+            <th>Intenção</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>PGRS empresa brasília</td>
+            <td><span class="kw-match m-exact">Exata</span></td>
+            <td><div class="vol-bar-wrap"><div class="vol-bar"><div class="vol-fill" style="width:50%"></div></div><span class="vol-num">200–720</span></div></td>
+            <td><span class="cpc-val">R$ 3,20</span></td>
+            <td><span class="intent-icon">🔴</span> Compra imediata</td>
+          </tr>
+          <tr>
+            <td>plano de gerenciamento de resíduos sólidos DF</td>
+            <td><span class="kw-match m-phrase">Frase</span></td>
+            <td><div class="vol-bar-wrap"><div class="vol-bar"><div class="vol-fill" style="width:55%"></div></div><span class="vol-num">260–850</span></div></td>
+            <td><span class="cpc-val">R$ 2,90</span></td>
+            <td><span class="intent-icon">🟠</span> Pesquisa de fornecedor</td>
+          </tr>
+          <tr>
+            <td>MTR manifesto de transporte de resíduos brasília</td>
+            <td><span class="kw-match m-phrase">Frase</span></td>
+            <td><div class="vol-bar-wrap"><div class="vol-bar"><div class="vol-fill" style="width:45%"></div></div><span class="vol-num">160–600</span></div></td>
+            <td><span class="cpc-val">R$ 2,60</span></td>
+            <td><span class="intent-icon">🟠</span> Pesquisa de fornecedor</td>
+          </tr>
+          <tr>
+            <td>empresa licenciada resíduos IBAMA DF</td>
+            <td><span class="kw-match m-exact">Exata</span></td>
+            <td><div class="vol-bar-wrap"><div class="vol-bar"><div class="vol-fill" style="width:28%"></div></div><span class="vol-num">60–240</span></div></td>
+            <td><span class="cpc-val">R$ 3,80</span></td>
+            <td><span class="intent-icon">🔴</span> Compra imediata</td>
+          </tr>
+          <tr>
+            <td>licença ambiental resíduos perigosos brasília</td>
+            <td><span class="kw-match m-broad">Ampla mod.</span></td>
+            <td><div class="vol-bar-wrap"><div class="vol-bar"><div class="vol-fill" style="width:38%"></div></div><span class="vol-num">100–380</span></div></td>
+            <td><span class="cpc-val">R$ 3,40</span></td>
+            <td><span class="intent-icon">🟠</span> Pesquisa de fornecedor</td>
+          </tr>
+          <tr>
+            <td>certificado de destinação final resíduos DF</td>
+            <td><span class="kw-match m-exact">Exata</span></td>
+            <td><div class="vol-bar-wrap"><div class="vol-bar"><div class="vol-fill" style="width:22%"></div></div><span class="vol-num">50–200</span></div></td>
+            <td><span class="cpc-val">R$ 4,10</span></td>
+            <td><span class="intent-icon">🔴</span> Compra imediata</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- GRUPO 3 -->
+    <div class="grupo">
+      <div class="grupo-header">
+        <div class="grupo-tag" style="color:#85B7F4;background:rgba(29,78,216,.12)">Grupo 03</div>
+        <div class="grupo-name">Resíduos de Saúde · PGRSS</div>
+        <div class="grupo-intent">🎯 Hospitais e clínicas · alta urgência</div>
+      </div>
+      <table class="kw-table">
+        <thead>
+          <tr>
+            <th>Palavra-chave</th>
+            <th>Correspondência</th>
+            <th>Vol. mensal (BR)</th>
+            <th>CPC estimado</th>
+            <th>Intenção</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>coleta resíduos serviços de saúde brasília</td>
+            <td><span class="kw-match m-exact">Exata</span></td>
+            <td><div class="vol-bar-wrap"><div class="vol-bar"><div class="vol-fill" style="width:42%"></div></div><span class="vol-num">130–480</span></div></td>
+            <td><span class="cpc-val">R$ 5,50</span></td>
+            <td><span class="intent-icon">🔴</span> Compra imediata</td>
+          </tr>
+          <tr>
+            <td>RSS resíduos infectantes coleta DF</td>
+            <td><span class="kw-match m-exact">Exata</span></td>
+            <td><div class="vol-bar-wrap"><div class="vol-bar"><div class="vol-fill" style="width:32%"></div></div><span class="vol-num">80–300</span></div></td>
+            <td><span class="cpc-val">R$ 4,90</span></td>
+            <td><span class="intent-icon">🔴</span> Compra imediata</td>
+          </tr>
+          <tr>
+            <td>PGRSS clínica brasília empresa licenciada</td>
+            <td><span class="kw-match m-phrase">Frase</span></td>
+            <td><div class="vol-bar-wrap"><div class="vol-bar"><div class="vol-fill" style="width:25%"></div></div><span class="vol-num">50–200</span></div></td>
+            <td><span class="cpc-val">R$ 4,60</span></td>
+            <td><span class="intent-icon">🔴</span> Compra imediata</td>
+          </tr>
+          <tr>
+            <td>descarte lixo hospitalar DF</td>
+            <td><span class="kw-match m-broad">Ampla mod.</span></td>
+            <td><div class="vol-bar-wrap"><div class="vol-bar"><div class="vol-fill" style="width:48%"></div></div><span class="vol-num">180–620</span></div></td>
+            <td><span class="cpc-val">R$ 3,70</span></td>
+            <td><span class="intent-icon">🟠</span> Pesquisa de fornecedor</td>
+          </tr>
+          <tr>
+            <td>gerenciamento resíduos laboratorio brasília</td>
+            <td><span class="kw-match m-phrase">Frase</span></td>
+            <td><div class="vol-bar-wrap"><div class="vol-bar"><div class="vol-fill" style="width:20%"></div></div><span class="vol-num">40–160</span></div></td>
+            <td><span class="cpc-val">R$ 4,30</span></td>
+            <td><span class="intent-icon">🔴</span> Compra imediata</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- GRUPO 4 -->
+    <div class="grupo">
+      <div class="grupo-header">
+        <div class="grupo-tag" style="color:#D8A8F0;background:rgba(147,51,234,.12)">Grupo 04</div>
+        <div class="grupo-name">Locação de Equipamentos Ambientais</div>
+        <div class="grupo-intent">🎯 Intenção comercial · ticket médio</div>
+      </div>
+      <table class="kw-table">
+        <thead>
+          <tr>
+            <th>Palavra-chave</th>
+            <th>Correspondência</th>
+            <th>Vol. mensal (BR)</th>
+            <th>CPC estimado</th>
+            <th>Intenção</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>locação caçamba resíduos brasília</td>
+            <td><span class="kw-match m-exact">Exata</span></td>
+            <td><div class="vol-bar-wrap"><div class="vol-bar"><div class="vol-fill" style="width:80%"></div></div><span class="vol-num">600–2k</span></div></td>
+            <td><span class="cpc-val">R$ 2,80</span></td>
+            <td><span class="intent-icon">🔴</span> Compra imediata</td>
+          </tr>
+          <tr>
+            <td>aluguel equipamentos saneamento DF</td>
+            <td><span class="kw-match m-phrase">Frase</span></td>
+            <td><div class="vol-bar-wrap"><div class="vol-bar"><div class="vol-fill" style="width:38%"></div></div><span class="vol-num">100–380</span></div></td>
+            <td><span class="cpc-val">R$ 2,40</span></td>
+            <td><span class="intent-icon">🟠</span> Pesquisa de fornecedor</td>
+          </tr>
+          <tr>
+            <td>ETE estação tratamento efluentes brasília</td>
+            <td><span class="kw-match m-phrase">Frase</span></td>
+            <td><div class="vol-bar-wrap"><div class="vol-bar"><div class="vol-fill" style="width:45%"></div></div><span class="vol-num">160–560</span></div></td>
+            <td><span class="cpc-val">R$ 3,60</span></td>
+            <td><span class="intent-icon">🟠</span> Pesquisa de fornecedor</td>
+          </tr>
+          <tr>
+            <td>tratamento efluentes industriais DF empresa</td>
+            <td><span class="kw-match m-exact">Exata</span></td>
+            <td><div class="vol-bar-wrap"><div class="vol-bar"><div class="vol-fill" style="width:30%"></div></div><span class="vol-num">70–280</span></div></td>
+            <td><span class="cpc-val">R$ 4,20</span></td>
+            <td><span class="intent-icon">🔴</span> Compra imediata</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div><!-- /grupos -->
+
+  <!-- SITELINKS PROPOSTOS -->
+  <div style="margin-top:40px">
+    <p style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:16px">Sitelinks propostos para o anúncio principal</p>
+    <div class="sitelinks-preview">
+      <div class="sl-header">Como o anúncio vai aparecer com todos os recursos ativados</div>
+      <div class="sl-grid">
+        <div class="sl-item">
+          <div class="sl-title">Resíduos Classe I e II</div>
+          <div class="sl-desc">Coleta, transporte e destinação de resíduos perigosos e não perigosos</div>
+        </div>
+        <div class="sl-item">
+          <div class="sl-title">PGRS e MTR Online</div>
+          <div class="sl-desc">Plano de gerenciamento e manifesto de transporte com CDF emitido</div>
+        </div>
+        <div class="sl-item">
+          <div class="sl-title">Resíduos de Saúde (RSS)</div>
+          <div class="sl-desc">Coleta licenciada para hospitais, clínicas e laboratórios no DF</div>
+        </div>
+        <div class="sl-item">
+          <div class="sl-title">Solicitar Orçamento</div>
+          <div class="sl-desc">Atendimento técnico em até 24h · 0800 400 0442</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEGATIVAS -->
+  <div style="margin-top:32px;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:24px;">
+    <p style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:14px">Palavras-chave negativas (evitar desperdício de verba)</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <span style="background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.3);color:#F1948A;font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px">grátis</span>
+      <span style="background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.3);color:#F1948A;font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px">curso gestão ambiental</span>
+      <span style="background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.3);color:#F1948A;font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px">como fazer PGRS</span>
+      <span style="background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.3);color:#F1948A;font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px">modelo PGRS download</span>
+      <span style="background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.3);color:#F1948A;font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px">emprego gestão ambiental</span>
+      <span style="background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.3);color:#F1948A;font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px">lixo doméstico</span>
+      <span style="background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.3);color:#F1948A;font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px">coleta seletiva prefeitura</span>
+      <span style="background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.3);color:#F1948A;font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px">reciclagem residencial</span>
+      <span style="background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.3);color:#F1948A;font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px">concurso IBAMA</span>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ══════════════════ PLANO ══════════════════ -->
+<section class="section plano-outer">
+  <div class="sec-label">Execução</div>
+  <h2>O que acontece nos primeiros 60 dias</h2>
+  <p class="lead">Sem queimar verba sem estrutura. Cada fase prepara o terreno para a próxima.</p>
+
+  <div class="plano-grid">
+    <div class="plano-card">
+      <div class="plano-week">Semana 1–2 · Fundação</div>
+      <h3>Auditoria e infraestrutura</h3>
+      <p>Antes de gastar um real em anúncio, garantimos que tudo está rastreado corretamente. Pixel, conversões, Google Analytics 4 e tag manager configurados.</p>
+      <div class="task-list">
+        <div class="task">Configuração Google Tag Manager + GA4</div>
+        <div class="task">Instalação Meta Pixel com eventos de conversão</div>
+        <div class="task">Rastreamento de chamadas (0800 + WhatsApp)</div>
+        <div class="task">Auditoria do anúncio atual e palavras-chave ativas</div>
+        <div class="task">Pesquisa de concorrência no DF (quem está anunciando o quê)</div>
+        <div class="task">Otimização do Google Meu Negócio</div>
+      </div>
+    </div>
+
+    <div class="plano-card">
+      <div class="plano-week">Semana 2–3 · Lançamento</div>
+      <h3>Campanhas no ar com estrutura correta</h3>
+      <p>Quatro campanhas separadas por serviço, com grupos de anúncios dedicados, sitelinks configurados e extensões ativas.</p>
+      <div class="task-list">
+        <div class="task">Campanha 1: Resíduos Industriais Classe I e II</div>
+        <div class="task">Campanha 2: PGRS, MTR e conformidade legal</div>
+        <div class="task">Campanha 3: RSS — hospitais e saúde</div>
+        <div class="task">Campanha 4: Locação de equipamentos</div>
+        <div class="task">Sitelinks, extensões de chamada e localização</div>
+        <div class="task">Lista de negativação ativa desde o dia 1</div>
+      </div>
+    </div>
+
+    <div class="plano-card">
+      <div class="plano-week">Semana 3–5 · Otimização</div>
+      <h3>Corte de desperdício, escala do que funciona</h3>
+      <p>Com os primeiros dados, otimizamos lances, cortamos termos que consomem sem converter e escalamos os grupos com melhor custo por lead.</p>
+      <div class="task-list">
+        <div class="task">Análise de relatório de termos de pesquisa</div>
+        <div class="task">Ajuste de lances por dispositivo, horário e local</div>
+        <div class="task">Testes A/B de títulos de anúncio</div>
+        <div class="task">Expansão de negativação com novos termos irrelevantes</div>
+        <div class="task">Remarketing para visitantes que não converteram</div>
+      </div>
+    </div>
+
+    <div class="plano-card">
+      <div class="plano-week">Semana 5–8 · Expansão</div>
+      <h3>Escala + início de SEO orgânico</h3>
+      <p>Com campanhas estabilizadas e custo por lead mapeado, iniciamos a estratégia orgânica que vai reduzir dependência de verba no médio prazo.</p>
+      <div class="task-list">
+        <div class="task">Otimização on-page das principais páginas do site</div>
+        <div class="task">Primeiro artigo de autoridade: "PGRS obrigatório para empresas no DF"</div>
+        <div class="task">Google Meu Negócio: posts semanais e respostas a avaliações</div>
+        <div class="task">Relatório 60 dias: custo por lead, ROI por campanha</div>
+        <div class="task">Reunião estratégica: planejamento do trimestre 2</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ══════════════════ INVESTIMENTO ══════════════════ -->
+<section class="section">
+  <div class="sec-label">Investimento</div>
+  <h2>Gestão completa · uma taxa fixa · zero surpresa</h2>
+  <p class="lead">Um serviço completo de tráfego pago no Google + SEO orgânico + visibilidade nas IAs. Verba de anúncio paga diretamente pelo cliente ao Google.</p>
+
+  <!-- PLANO ÚNICO -->
+  <div style="display:grid;grid-template-columns:1fr 1.45fr;gap:0;border:1px solid var(--rule);border-radius:16px;overflow:hidden;margin-bottom:48px;">
+
+    <!-- LEFT: preço e CTA -->
+    <div style="background:var(--g900);padding:48px 40px;display:flex;flex-direction:column;justify-content:space-between;">
+      <div>
+        <div style="display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:#fff;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:24px;">Taxa de gestão mensal</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:64px;line-height:1;color:var(--g300);margin-bottom:8px;">R$&nbsp;1.800</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.4);font-weight:500;margin-bottom:32px;">/mês · sem fidelidade obrigatória</div>
+        <div style="border-top:1px solid rgba(255,255,255,.08);padding-top:28px;">
+          <p style="font-size:12px;color:rgba(255,255,255,.35);line-height:1.7;">A verba de anúncio (o que você investe no Google Ads) é paga <strong style="color:rgba(255,255,255,.6)">diretamente pelo cliente ao Google</strong> — não passa por mim. Você tem controle total do dinheiro.</p>
+        </div>
+      </div>
+      <div style="margin-top:36px;">
+        <a href="https://wa.me/5561991445526?text=Olá!%20Vi%20a%20proposta%20da%20DMS%20Ambiental%20e%20tenho%20interesse%20em%20conversar%20sobre%20gestão%20de%20tráfego%20e%20SEO." style="display:block;background:var(--g400);color:#fff;border-radius:10px;padding:16px 24px;font-size:14px;font-weight:700;text-align:center;text-decoration:none;transition:background .2s;">Quero começar agora →</a>
+        <p style="font-size:11px;color:rgba(255,255,255,.25);text-align:center;margin-top:12px;">Primeiras campanhas no ar em até 72h após aprovação</p>
+      </div>
+    </div>
+
+    <!-- RIGHT: o que está incluso -->
+    <div style="padding:40px;background:var(--white);">
+      <p style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);margin-bottom:20px;">O que está incluso</p>
+
+      <div style="display:flex;flex-direction:column;gap:0;">
+
+        <div style="display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid var(--rule);">
+          <div style="width:32px;height:32px;border-radius:8px;background:var(--g50);display:grid;place-items:center;font-size:15px;flex-shrink:0;">🎯</div>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:3px;">Google Ads — 4 campanhas segmentadas</div>
+            <div style="font-size:12px;color:var(--ink3);line-height:1.6;">Resíduos Industriais · PGRS e Conformidade · RSS Saúde · Locação de Equipamentos. Grupos de anúncios dedicados, sitelinks, extensões de chamada e localização.</div>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid var(--rule);">
+          <div style="width:32px;height:32px;border-radius:8px;background:var(--g50);display:grid;place-items:center;font-size:15px;flex-shrink:0;">🔍</div>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:3px;">SEO orgânico no Google</div>
+            <div style="font-size:12px;color:var(--ink3);line-height:1.6;">Otimização on-page das páginas principais, Google Meu Negócio atualizado, construção de autoridade técnica para ranquear em "gestão de resíduos Brasília" e termos correlatos.</div>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid var(--rule);">
+          <div style="width:32px;height:32px;border-radius:8px;background:var(--g50);display:grid;place-items:center;font-size:15px;flex-shrink:0;">🤖</div>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:3px;">Visibilidade nas IAs — Google AI Overviews e ChatGPT</div>
+            <div style="font-size:12px;color:var(--ink3);line-height:1.6;">Em 2026, respostas do Google já aparecem com IA antes dos links. Estruturamos o conteúdo do site para a DMS ser citada quando alguém perguntar a uma IA "qual empresa de resíduos no DF".</div>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid var(--rule);">
+          <div style="width:32px;height:32px;border-radius:8px;background:var(--g50);display:grid;place-items:center;font-size:15px;flex-shrink:0;">🔁</div>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:3px;">Remarketing e negativação contínua</div>
+            <div style="font-size:12px;color:var(--ink3);line-height:1.6;">Reimpacto de visitantes que não converteram. Lista de negativação ativa para eliminar buscas de emprego, cursos e coleta doméstica que desperdiçam verba.</div>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid var(--rule);">
+          <div style="width:32px;height:32px;border-radius:8px;background:var(--g50);display:grid;place-items:center;font-size:15px;flex-shrink:0;">📊</div>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:3px;">Rastreamento completo + relatório semanal</div>
+            <div style="font-size:12px;color:var(--ink3);line-height:1.6;">Google Analytics 4, rastreamento de chamadas (0800 e WhatsApp), relatório semanal de custo por lead e reunião mensal de estratégia. Você decide com dados.</div>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:flex-start;gap:14px;padding:14px 0;">
+          <div style="width:32px;height:32px;border-radius:8px;background:var(--g50);display:grid;place-items:center;font-size:15px;flex-shrink:0;">⚡</div>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:3px;">Suporte direto · resposta em até 2h</div>
+            <div style="font-size:12px;color:var(--ink3);line-height:1.6;">Você fala diretamente com quem gerencia a campanha. Sem intermediário, sem passar por atendimento de agência.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /plano único -->
+
+  <!-- RECOMENDAÇÃO DE VERBA POR PLATAFORMA -->
+  <div style="margin-bottom:8px;">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:24px;">
+      <div style="width:20px;height:2px;background:var(--g400);"></div>
+      <span style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--g500);">Recomendação de verba por plataforma</span>
+    </div>
+    <p style="font-size:14px;color:var(--ink3);max-width:620px;line-height:1.7;margin-bottom:20px;">Esta é a verba que você investe <strong style="color:var(--ink)">diretamente no Google</strong> — separada da taxa de gestão. Recomendação para os primeiros 90 dias, distribuída por prioridade de retorno.</p>
+
+    <div style="display:flex;align-items:flex-start;gap:16px;background:var(--g900);border-radius:12px;padding:22px 24px;margin-bottom:32px;">
+      <div style="font-size:22px;flex-shrink:0;margin-top:2px;">📈</div>
+      <div>
+        <p style="font-size:13px;font-weight:700;color:#fff;margin-bottom:6px;">Os valores abaixo são médias baseadas em estudo de mercado — não um compromisso fixo.</p>
+        <p style="font-size:13px;color:rgba(255,255,255,.6);line-height:1.7;">O investimento em anúncios pode começar menor e crescer de forma <strong style="color:var(--g300)">progressiva</strong>, conforme os resultados aparecem e a confiança no canal se consolida. O mais importante é começar com estrutura correta — o valor pode ser ajustado a qualquer momento.</p>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+
+      <!-- Google Ads Busca -->
+      <div style="border:1px solid var(--rule);border-radius:14px;overflow:hidden;">
+        <div style="background:var(--g900);padding:20px 22px 16px;">
+          <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--g300);margin-bottom:10px;">Prioridade 1</div>
+          <div style="font-size:16px;font-weight:800;color:#fff;margin-bottom:4px;">Google Ads · Busca</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.45);">Rede de pesquisa · fundo de funil</div>
+        </div>
+        <div style="padding:22px;">
+          <div style="font-family:'DM Serif Display',serif;font-size:36px;color:var(--g600);line-height:1;margin-bottom:4px;">R$ 1.500 – 3.000</div>
+          <div style="font-size:11px;color:var(--ink3);margin-bottom:16px;">/mês de verba no Google</div>
+          <div style="font-size:12px;color:var(--ink2);line-height:1.7;">O canal de maior intenção de compra. Quem pesquisa "coleta resíduos perigosos DF" está com um problema real agora. Começamos com uma verba enxuta e escalamos conforme o retorno se comprova.</div>
+          <div style="margin-top:14px;padding:10px 14px;background:var(--g50);border-radius:8px;font-size:11px;color:var(--g700);font-weight:600;">Estimativa: 30–90 cliques qualificados/mês</div>
+        </div>
+      </div>
+
+      <!-- Google Ads Display/Remarketing -->
+      <div style="border:1px solid var(--rule);border-radius:14px;overflow:hidden;">
+        <div style="background:#1D3557;padding:20px 22px 16px;">
+          <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#85B7F4;margin-bottom:10px;">Prioridade 2</div>
+          <div style="font-size:16px;font-weight:800;color:#fff;margin-bottom:4px;">Google Ads · Display</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.45);">Remarketing · ativação quando fizer sentido</div>
+        </div>
+        <div style="padding:22px;">
+          <div style="font-family:'DM Serif Display',serif;font-size:36px;color:#1D3557;line-height:1;margin-bottom:4px;">~R$ 350</div>
+          <div style="font-size:11px;color:var(--ink3);margin-bottom:16px;">/mês · ativado quando a busca estiver rodando</div>
+          <div style="font-size:12px;color:var(--ink2);line-height:1.7;">Não começamos por aqui. Primeiro provamos retorno no Google Busca — depois ativamos o Display para reimpactar quem visitou o site e não entrou em contato. Investimento baixo, alto alcance de reforço.</div>
+          <div style="margin-top:14px;padding:10px 14px;background:#EFF6FF;border-radius:8px;font-size:11px;color:#1D4ED8;font-weight:600;">Fase 2 · ativa após 30–45 dias</div>
+        </div>
+      </div>
+
+      <!-- SEO / IA -->
+      <div style="border:1px solid var(--rule);border-radius:14px;overflow:hidden;">
+        <div style="background:#2C3E50;padding:20px 22px 16px;">
+          <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#A8D5BA;margin-bottom:10px;">Prioridade 3</div>
+          <div style="font-size:16px;font-weight:800;color:#fff;margin-bottom:4px;">SEO + IA Visibility</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.45);">Orgânico · sem custo por clique</div>
+        </div>
+        <div style="padding:22px;">
+          <div style="font-family:'DM Serif Display',serif;font-size:36px;color:#2C3E50;line-height:1;margin-bottom:4px;">R$ 0</div>
+          <div style="font-size:11px;color:var(--ink3);margin-bottom:16px;">/mês · incluso na gestão</div>
+          <div style="font-size:12px;color:var(--ink2);line-height:1.7;">SEO orgânico e otimização para Google AI Overviews e ChatGPT estão inclusos na taxa de gestão. Construção de autoridade de longo prazo — tráfego sem pagar por clique.</div>
+          <div style="margin-top:14px;padding:10px 14px;background:#F0FFF4;border-radius:8px;font-size:11px;color:#276749;font-weight:600;">Resultado em 60–120 dias · cresce todo mês</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RESUMO FINANCEIRO -->
+    <div style="margin-top:20px;border:1px solid var(--rule);border-radius:12px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;background:var(--bg);">
+        <div style="padding:20px 24px;border-right:1px solid var(--rule);">
+          <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3);margin-bottom:6px;">Taxa de gestão</div>
+          <div style="font-size:20px;font-weight:800;color:var(--g900);">R$ 1.800<span style="font-size:12px;font-weight:500;color:var(--ink3)">/mês</span></div>
+        </div>
+        <div style="padding:20px 24px;border-right:1px solid var(--rule);">
+          <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3);margin-bottom:6px;">Verba Google (recomendada)</div>
+          <div style="font-size:20px;font-weight:800;color:var(--g900);">R$ 1.500 – 3.000<span style="font-size:12px;font-weight:500;color:var(--ink3)">/mês</span></div>
+        </div>
+        <div style="padding:20px 24px;border-right:1px solid var(--rule);">
+          <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3);margin-bottom:6px;">Total mensal estimado</div>
+          <div style="font-size:20px;font-weight:800;color:var(--g900);">R$ 3.300 – 4.800<span style="font-size:12px;font-weight:500;color:var(--ink3)">/mês</span></div>
+        </div>
+        <div style="padding:20px 24px;">
+          <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3);margin-bottom:6px;">Estimativa de leads/mês</div>
+          <div style="font-size:20px;font-weight:800;color:var(--g600);">15–35 leads<span style="font-size:12px;font-weight:500;color:var(--ink3)"> qualificados</span></div>
+        </div>
+      </div>
+      <div style="padding:14px 24px;background:var(--g50);border-top:1px solid var(--rule);">
+        <p style="font-size:12px;color:var(--ink3);">A verba de anúncio é paga diretamente pelo cliente ao Google — não passa pela gestão. Começamos enxuto, com R$ 1.500/mês, e escalamos conforme os resultados se comprovam. O cliente tem acesso à conta e vê cada real em tempo real.</p>
+      </div>
+    </div>
+
+  </div><!-- /verba plataforma -->
+</section>
+
+<!-- ══════════════════ ROI ══════════════════ -->
+<section class="section roi-bg">
+  <div class="sec-label">Projeção de resultados</div>
+  <h2>O que esperar nos primeiros 6 meses</h2>
+  <p class="lead">Projeções conservadoras baseadas em campanhas similares no setor ambiental e industrial B2B no Centro-Oeste.</p>
+
+  <div class="roi-grid">
+    <div class="roi-card">
+      <div class="roi-num">3<span class="roi-unit">×</span></div>
+      <div class="roi-desc">Aumento de visitas qualificadas ao site vs. situação atual</div>
+    </div>
+    <div class="roi-card">
+      <div class="roi-num">-40<span class="roi-unit">%</span></div>
+      <div class="roi-desc">Redução no custo por lead após 60 dias de otimização</div>
+    </div>
+    <div class="roi-card">
+      <div class="roi-num">Top<span class="roi-unit"> 3</span></div>
+      <div class="roi-desc">Posição no Google para termos estratégicos de Brasília em 90 dias</div>
+    </div>
+    <div class="roi-card">
+      <div class="roi-num">+60<span class="roi-unit">%</span></div>
+      <div class="roi-desc">Aumento em orçamentos recebidos via site e WhatsApp</div>
+    </div>
+  </div>
+
+  <div class="insight" style="margin-top:32px">
+    <strong>Transparência total — você vê cada real investido</strong>
+    <p>Relatório semanal de campanhas com cliques, impressões, custo por lead e origem dos contatos. Nenhum investimento sem rastreamento. A DMS decide com dados, não com promessa de agência.</p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ══════════════════ POR QUE EU ══════════════════ -->
+<section class="section">
+  <div class="sec-label">Por que trabalhar comigo</div>
+  <h2>Especialista no seu resultado — sem intermediário</h2>
+  <p class="lead">Você fala diretamente com quem configura, otimiza e pensa na sua campanha todos os dias.</p>
+
+  <div class="pq-grid">
+    <div class="pq-item">
+      <div class="pq-icon">🏭</div>
+      <div>
+        <h3>Especialista em B2B industrial e ambiental</h3>
+        <p>Experiência com empresas de gestão de resíduos, saneamento e conformidade ambiental. Entendo o ciclo longo de vendas B2B e o vocabulário do seu cliente (PGRS, MTR, CDF, Classe I, IBAMA).</p>
+      </div>
+    </div>
+    <div class="pq-item">
+      <div class="pq-icon">📍</div>
+      <div>
+        <h3>Foco no mercado de Brasília</h3>
+        <p>Conheço o contexto do DF: órgãos públicos, hospitais do Plano Piloto, indústrias de Ceilândia, construtoras do entorno. Segmentação geográfica precisa dentro e fora do DF.</p>
+      </div>
+    </div>
+    <div class="pq-item">
+      <div class="pq-icon">📊</div>
+      <div>
+        <h3>Relatórios em linguagem de negócio</h3>
+        <p>Sem métricas de vaidade. Você recebe custo por lead, origem dos contatos, campanhas com melhor ROI e recomendações de ação — em linguagem clara, sem enrolação.</p>
+      </div>
+    </div>
+    <div class="pq-item">
+      <div class="pq-icon">⚡</div>
+      <div>
+        <h3>Primeiras campanhas em até 72 horas</h3>
+        <p>Aprovada a proposta, a estrutura inicial está no ar em 3 dias úteis. Sem comitê, sem processo burocrático de onboarding, sem espera de semanas para ver resultado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ CTA ══════════════════ -->
+<section class="cta-section">
+  <div class="cta-glow"></div>
+  <div class="eyebrow" style="justify-content:center">Próximo passo</div>
+  <h2>Vamos colocar a DMS no topo do Google?</h2>
+  <p>30 minutos de conversa para alinhar objetivos e definir o plano ideal. Sem compromisso, sem enrolação.</p>
+  <div class="cta-btns">
+    <a href="https://wa.me/5561991445526?text=Olá!%20Vi%20a%20proposta%20da%20DMS%20Ambiental%20e%20tenho%20interesse%20em%20conversar%20sobre%20gestão%20de%20tráfego%20e%20SEO." class="cta-btn-pri">💬 Falar no WhatsApp agora</a>
+    <a href="mailto:voce@seudominio.com.br" class="cta-btn-sec">✉️ Enviar por e-mail</a>
+  </div>
+</section>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer class="footer">
+  <p>© 2026 · Proposta exclusiva para DMS Ambiental · CNPJ 04.389.820/0001-78 · Documento confidencial</p>
+  <div class="footer-links">
+    <a href="https://dmsambiental.com.br" target="_blank">dmsambiental.com.br</a>
+    <a href="mailto:comercial@dmsambiental.com.br">comercial@dmsambiental.com.br</a>
+    <a href="tel:08004000442">0800 400 0442</a>
+  </div>
+</footer>
+
+</body>
+</html>
